@@ -3,4 +3,4 @@ console://failed to launch "init.beast"
 console://launch restarting...
 console://LAUNCH SUCCESSFUL!
 console://ERROR Files not detected
-console://oi.buhtig.eitsourftsebeht.www//:sptth
+console://DETPYRCNE/oi.buhtig.eitsourftsebeht.www//:sptt
