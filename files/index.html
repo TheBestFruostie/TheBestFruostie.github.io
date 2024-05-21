@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>File Server</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            margin-bottom: 10px;
+        }
+        a {
+            text-decoration: none;
+            color: #333;
+        }
+        a:hover {
+            color: #007bff;
+        }
+        .search-bar {
+            margin-bottom: 20px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>File Server</h1>
+        <input type="text" id="searchInput" class="search-bar" placeholder="Search files...">
+        <ul id="fileList">
+            <li><a href="files/rsz_warfront.png">Warfront Fandom Logo</a></li>
+            <li><a href="files/Warfront (1).png">Warfront Season 1 Logo</a></li>
+            <li><a href="files/Warfront (2).png">Warfront Season 2 Logo</a></li>
+            <li><a href="files/placeholder.png">FruoCrew Publisher License</a></li>
+            <li><a href="files/placeholder.png">placeholder</a></li>
+            <!-- Add more files as needed -->
+        </ul>
+    </div>
+
+    <script>
+        document.getElementById('searchInput').addEventListener('input', function() {
+            const searchText = this.value.toLowerCase();
+            const files = document.querySelectorAll('#fileList li');
+            files.forEach(function(file) {
+                const fileName = file.textContent.toLowerCase();
+                if (fileName.includes(searchText)) {
+                    file.style.display = 'block';
+                } else {
+                    file.style.display = 'none';
+                }
+            });
+        });
+    </script>
+</body>
+</html>

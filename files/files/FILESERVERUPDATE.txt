@@ -1,0 +1,6 @@
+console://program init.beast -y
+console://failed to launch "init.beast"
+console://launch restarting...
+console://LAUNCH SUCCESSFUL!
+console://ERROR Files not detected
+console://oi.buhtig.eitsourftsebeht.www//:sptth
