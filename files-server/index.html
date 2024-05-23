@@ -45,11 +45,35 @@
             width: 100%;
             box-sizing: border-box;
         }
+        #fileInputContainer {
+            text-align: center;
+            margin-bottom: 10px;
+        }
+        #fileInput {
+            display: none;
+        }
+        #addFileBtn {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            display: inline-block;
+            margin-right: 10px;
+        }
+        #addFileBtn:hover {
+            background-color: #0056b3;
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <h1>File Server</h1>
+        <div id="fileInputContainer">
+            <label for="fileInput" id="addFileBtn">Add Files</label>
+            <input type="file" id="fileInput" accept=".txt, .pdf, .doc, .docx, .png, .jpg, .jpeg" onchange="addFile()">
+        </div>
         <input type="text" id="searchInput" class="search-bar" placeholder="Search files...">
         <ul id="fileList">
             <li><a href="files/rsz_warfront.png">Warfront Fandom Logo</a></li>
@@ -62,6 +86,23 @@
     </div>
 
     <script>
+        function addFile() {
+            const fileInput = document.getElementById('fileInput');
+            const fileList = document.getElementById('fileList');
+            
+            // Check if a file was selected
+            if (fileInput.files.length > 0) {
+                const file = fileInput.files[0];
+                const fileName = file.name;
+                const listItem = document.createElement('li');
+                const link = document.createElement('a');
+                link.href = URL.createObjectURL(file);
+                link.textContent = fileName;
+                listItem.appendChild(link);
+                fileList.appendChild(listItem);
+            }
+        }
+
         document.getElementById('searchInput').addEventListener('input', function() {
             const searchText = this.value.toLowerCase();
             const files = document.querySelectorAll('#fileList li');
