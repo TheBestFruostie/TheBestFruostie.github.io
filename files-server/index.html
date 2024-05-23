@@ -70,38 +70,43 @@
 <body>
     <div class="container">
         <h1>File Server</h1>
-        <div id="fileInputContainer">
-            <label for="fileInput" id="addFileBtn">Add Files</label>
-            <input type="file" id="fileInput" accept=".txt, .pdf, .doc, .docx, .png, .jpg, .jpeg" onchange="addFile()">
-        </div>
-        <input type="text" id="searchInput" class="search-bar" placeholder="Search files...">
-        <ul id="fileList">
-            <li><a href="files/rsz_warfront.png">Warfront Fandom Logo</a></li>
-            <li><a href="files/Warfront (1).png">Warfront Season 1 Logo</a></li>
-            <li><a href="files/Warfront (2).png">Warfront Season 2 Logo</a></li>
-            <li><a href="files/placeholder.png">FruoCrew Publisher License</a></li>
-            <li><a href="files/CONSOLELOGS.txt">ENCRYPTED</a></li>
-            <!-- Add more files as needed -->
-        </ul>
+        <form id="uploadForm" enctype="multipart/form-data">
+            <div id="fileInputContainer">
+                <label for="fileInput" id="addFileBtn">Add Files</label>
+                <input type="file" id="fileInput" name="file" accept=".txt, .pdf, .doc, .docx, .png, .jpg, .jpeg">
+            </div>
+            <input type="text" id="searchInput" class="search-bar" placeholder="Search files...">
+            <ul id="fileList">
+                <li><a href="files/rsz_warfront.png">Warfront Fandom Logo</a></li>
+                <li><a href="files/Warfront (1).png">Warfront Season 1 Logo</a></li>
+                <li><a href="files/Warfront (2).png">Warfront Season 2 Logo</a></li>
+                <li><a href="files/placeholder.png">FruoCrew Publisher License</a></li>
+                <li><a href="files/CONSOLELOGS.txt">ENCRYPTED</a></li>
+                <!-- Add more files as needed -->
+            </ul>
+            <button type="submit">Upload</button>
+        </form>
     </div>
 
     <script>
-        function addFile() {
-            const fileInput = document.getElementById('fileInput');
-            const fileList = document.getElementById('fileList');
-            
-            // Check if a file was selected
-            if (fileInput.files.length > 0) {
-                const file = fileInput.files[0];
-                const fileName = file.name;
-                const listItem = document.createElement('li');
-                const link = document.createElement('a');
-                link.href = URL.createObjectURL(file);
-                link.textContent = fileName;
-                listItem.appendChild(link);
-                fileList.appendChild(listItem);
-            }
-        }
+        document.getElementById('uploadForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent the default form submission
+            const formData = new FormData(this);
+            fetch('/upload', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => {
+                if (response.ok) {
+                    console.log('File uploaded successfully');
+                } else {
+                    console.error('Error uploading file');
+                }
+            })
+            .catch(error => {
+                console.error('Error uploading file:', error);
+            });
+        });
 
         document.getElementById('searchInput').addEventListener('input', function() {
             const searchText = this.value.toLowerCase();
